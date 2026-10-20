@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Francisco Marengo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio de Francisco Marengo. Estudiante avanzado de Ingeniería en Sistemas de Información en UTN-FRC, orientado a backend, bases de datos y automatización de procesos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una sola columna editorial; el hero es una consulta SQL cuyo resultado es la presentación. */
+:root{
+  --bg:#eceff3;
+  --surface:#f7f8fa;
+  --ink:#141b24;
+  --muted:#56606e;
+  --line:#cfd5dd;
+  --accent:#2347c9;
+  --mark:#f2b33d;
+  --code-bg:#151b25;
+  --code-fg:#dfe5ee;
+  --code-kw:#8fb0ff;
+  --code-str:#f2c46b;
+  --code-dim:#7a8597;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151d; --surface:#171e28; --ink:#e7ebf1; --muted:#9aa4b3; --line:#2a3340;
+    --accent:#86a4ff; --mark:#f2b33d; --code-bg:#0b0f15; --code-fg:#dfe5ee;
+    --code-kw:#8fb0ff; --code-str:#f2c46b; --code-dim:#6d7889; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151d; --surface:#171e28; --ink:#e7ebf1; --muted:#9aa4b3; --line:#2a3340;
+  --accent:#86a4ff; --mark:#f2b33d; --code-bg:#0b0f15; --code-fg:#dfe5ee;
+  --code-kw:#8fb0ff; --code-str:#f2c46b; --code-dim:#6d7889; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--f-body); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+
+.wrap{
+  max-width:1080px; margin:0 auto;
+  padding-left:max(20px, env(safe-area-inset-left, 0px));
+  padding-right:max(20px, env(safe-area-inset-right, 0px));
+}
+.skip{position:absolute; left:-999px}
+.skip:focus{left:16px; top:16px; background:var(--surface); padding:8px 12px; z-index:20}
+
+/* Nav */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--bg)}
+header.nav{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+}
+header.nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:14px}
+.logo{font-family:var(--f-mono); font-weight:500; font-size:15px; text-decoration:none}
+.logo span{color:var(--accent)}
+nav ul{display:flex; gap:22px; list-style:none; margin:0; padding:0; flex-wrap:wrap}
+nav a{text-decoration:none; font-size:14px; color:var(--muted)}
+nav a:hover{color:var(--ink)}
+@media (max-width:640px){ nav ul{gap:14px} nav li.opt{display:none} }
+
+/* Hero */
+.hero{padding-block:72px 56px; display:grid; grid-template-columns:1.05fr 1fr; gap:48px; align-items:center}
+.hero > *{min-width:0}
+.eyebrow{font-family:var(--f-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+h1{
+  font-family:var(--f-display); font-weight:800; letter-spacing:-.02em;
+  font-size:clamp(42px, 6.4vw, 76px); line-height:1; margin:14px 0 22px; text-wrap:balance;
+}
+h1 .hl{background:linear-gradient(transparent 62%, color-mix(in srgb, var(--mark) 70%, transparent) 62%); padding:0 .06em}
+.lead{font-size:19px; color:var(--muted); max-width:34ch; margin:0 0 28px}
+.cta{display:flex; flex-wrap:wrap; gap:12px}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+  font-weight:600; font-size:15px; padding:11px 18px; border-radius:999px;
+  border:1.5px solid var(--ink); transition:transform .15s ease, background .15s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--ink); color:var(--bg)}
+.btn.ghost:hover{background:var(--surface)}
+.meta{margin-top:30px; font-family:var(--f-mono); font-size:12.5px; color:var(--muted); letter-spacing:.04em}
+
+/* SQL console */
+.console{
+  background:var(--code-bg); color:var(--code-fg); border-radius:14px;
+  font-family:var(--f-mono); font-size:13.5px; line-height:1.65;
+  box-shadow:0 24px 48px -24px rgba(10,20,40,.45); overflow:hidden;
+}
+.console .bar{display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid #263041; color:var(--code-dim); font-size:12px}
+.console .dots{display:flex; gap:6px}
+.console .dots i{width:9px; height:9px; border-radius:50%; background:#2c3646; display:block}
+.console pre{margin:0; padding:18px 18px 14px; white-space:pre-wrap; overflow-wrap:anywhere}
+.kw{color:var(--code-kw)} .str{color:var(--code-str)} .dim{color:var(--code-dim)}
+.cursor{display:inline-block; width:.55em; height:1.05em; background:var(--code-fg); vertical-align:-2px; animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.result{overflow-x:auto; border-top:1px solid #263041}
+.result table{border-collapse:collapse; width:100%; font-size:12.5px}
+.result th,.result td{text-align:left; padding:7px 16px; border-bottom:1px solid #1f2735; vertical-align:top}
+.result th{color:var(--code-dim); font-weight:500}
+.result td:first-child{color:var(--code-kw); white-space:nowrap}
+.result .rows{padding:8px 16px 12px; color:var(--code-dim); font-size:12px}
+
+/* Sections */
+section{padding-block:72px; border-top:1px solid var(--line)}
+.sec-head{display:flex; flex-direction:column; gap:10px; margin-bottom:36px}
+.tag{font-family:var(--f-mono); font-size:13px; color:var(--accent)}
+h2{font-family:var(--f-display); font-weight:700; font-size:clamp(30px, 4.2vw, 46px); line-height:1.08; letter-spacing:-.015em; margin:0; text-wrap:balance; max-width:20ch}
+h3{font-family:var(--f-display); font-weight:700; font-size:22px; line-height:1.2; margin:0}
+
+/* About */
+.about{display:grid; grid-template-columns:1fr 1.5fr; gap:48px}
+.about > *{min-width:0}
+.facts{list-style:none; margin:0; padding:0; display:grid; gap:0; border-top:1px solid var(--line)}
+.facts li{display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); font-size:15px}
+.facts span:first-child{color:var(--muted); font-family:var(--f-mono); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; padding-top:2px}
+.facts span:last-child{text-align:right; font-weight:500}
+.prose p{margin:0 0 16px; max-width:62ch}
+.prose strong{font-weight:600}
+
+/* Stack */
+.stack{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.stack article{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:12px}
+.stack .label{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.chips{display:flex; flex-wrap:wrap; gap:6px; list-style:none; margin:0; padding:0}
+.chips li{font-family:var(--f-mono); font-size:12.5px; padding:4px 10px; border-radius:6px; border:1px solid var(--line); background:var(--bg)}
+.stack p{margin:0; color:var(--muted); font-size:15px}
+
+/* Projects */
+.projects{display:grid; gap:20px}
+.proj{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:0; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface)}
+.proj .vis{background:var(--code-bg); color:var(--code-fg); font-family:var(--f-mono); font-size:12.5px; line-height:1.7; padding:22px; display:flex; flex-direction:column; justify-content:center; min-width:0; overflow-x:auto}
+.proj .vis pre{margin:0; white-space:pre}
+.proj .body{padding:26px 28px; display:flex; flex-direction:column; gap:12px; min-width:0}
+.proj .kind{font-family:var(--f-mono); font-size:12px; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.status{font-family:var(--f-mono); font-size:11px; padding:2px 8px; border-radius:999px; background:color-mix(in srgb, var(--mark) 30%, transparent); color:var(--ink)}
+.proj p{margin:0; color:var(--muted); font-size:15.5px}
+.flow{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.flow b{font-weight:500; border:1px solid #2c3646; border-radius:6px; padding:4px 8px; white-space:nowrap}
+.flow .to{color:var(--code-str)}
+.note{font-size:13px; color:var(--muted); margin-top:16px}
+
+/* Process */
+.steps{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; border-top:2px solid var(--ink)}
+.steps li{padding:20px 20px 4px 0; display:flex; flex-direction:column; gap:8px}
+.steps .n{font-family:var(--f-mono); font-size:12px; color:var(--accent)}
+.steps p{margin:0; font-size:15px; color:var(--muted)}
+
+/* Search / contact */
+.next{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:start}
+.next > *{min-width:0}
+.next .box{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px}
+.box dl{margin:0; display:grid; gap:14px}
+.box dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+.box dd{margin:2px 0 0; font-weight:500}
+.contact{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-top:32px}
+.contact .item{border:1px solid var(--line); border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:6px; text-decoration:none; background:var(--surface); min-width:0}
+.contact a.item:hover{border-color:var(--accent)}
+.contact .k{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.contact .v{font-weight:600; overflow-wrap:anywhere}
+.copy{align-self:flex-start; font:inherit; font-size:13px; font-family:var(--f-mono); background:none; border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:3px 10px; cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:28px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:14px; color:var(--muted)}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr; padding-block:48px 40px; gap:36px}
+  .about,.next{grid-template-columns:1fr; gap:32px}
+  .proj{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .stack{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  section{padding-block:56px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#sobre-mi">Ir al contenido</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio">fran<span>.</span>sql</a>
+    <nav aria-label="Secciones">
+      <ul>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li class="opt"><a href="#tecnologias">Tecnologías</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Estudiante de Ingeniería en Sistemas · UTN-FRC</div>
+      <h1>Hola, soy <span class="hl">Francisco Marengo.</span></h1>
+      <p class="lead">Me gusta entender cómo funciona un proceso, encontrar dónde se traba y resolverlo con datos, backend y automatización.</p>
+      <div class="cta">
+        <a class="btn primary" href="#proyectos">Ver proyectos ↗</a>
+        <a class="btn ghost" href="#contacto">Contactarme</a>
+      </div>
+      <div class="meta">CÓRDOBA, ARGENTINA / UTN · FACULTAD REGIONAL CÓRDOBA</div>
+    </div>
+
+    <div class="console" role="figure" aria-label="Consulta SQL de presentación">
+      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span>portfolio.sql</span></div>
+<pre><span class="kw">SELECT</span> campo, valor
+<span class="kw">FROM</span>   personas
+<span class="kw">WHERE</span>  apodo = <span class="str">'Fran'</span>;<span class="cursor" aria-hidden="true"></span></pre>
+      <div class="result">
+        <table>
+          <thead><tr><th>campo</th><th>valor</th></tr></thead>
+          <tbody>
+            <tr><td>carrera</td><td>Ing. en Sistemas de Información</td></tr>
+            <tr><td>foco</td><td>backend, bases de datos, RPA</td></tr>
+            <tr><td>también</td><td>análisis y rediseño de procesos</td></tr>
+            <tr><td>idiomas</td><td>español, inglés intermedio-avanzado</td></tr>
+            <tr><td>estado</td><td>buscando pasantía part-time</td></tr>
+          </tbody>
+        </table>
+        <div class="rows">5 rows returned</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="sobre-mi">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">-- sobre mí</span>
+        <h2>Primero el proceso. Después el código.</h2>
+      </div>
+      <div class="about">
+        <ul class="facts">
+          <li><span>Universidad</span><span>UTN · FRC</span></li>
+          <li><span>Situación</span><span>Estudiante avanzado</span></li>
+          <li><span>Egreso estimado</span><span>2028</span></li>
+          <li><span>Inglés</span><span>Intermedio-avanzado</span></li>
+          <li><span>Base</span><span>Córdoba Capital</span></li>
+        </ul>
+        <div class="prose">
+          <p>Soy estudiante avanzado de <strong>Ingeniería en Sistemas de Información</strong> en la UTN Facultad Regional Córdoba. Me interesa la parte del software que no se ve: las APIs, los modelos de datos y las reglas que hacen que un sistema funcione.</p>
+          <p>Me siento más cómodo con <strong>Python y SQL</strong>, y en los proyectos de la facultad trabajo con Node.js, Express y Sequelize. Disfruto diseñar una base de datos y escribir la consulta justa para responder una pregunta.</p>
+          <p>También me atrae el análisis de procesos: relevar cómo trabaja una organización, detectar tareas repetitivas y pensar qué conviene rediseñar y qué conviene automatizar.</p>
+          <p>Tengo mucho por aprender y muchas ganas de hacerlo. Busco una primera experiencia profesional donde aportar y crecer junto a un equipo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologias">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">-- tecnologías</span>
+        <h2>Con lo que trabajo hoy.</h2>
+      </div>
+      <div class="stack">
+        <article>
+          <span class="label">backend</span>
+          <h3>Lógica y APIs</h3>
+          <ul class="chips"><li>Node.js</li><li>Express</li><li>APIs REST</li><li>Integración de APIs</li></ul>
+          <p>Endpoints, validación de parámetros y comunicación entre cliente, servidor y servicios externos.</p>
+        </article>
+        <article>
+          <span class="label">datos</span>
+          <h3>Bases de datos</h3>
+          <ul class="chips"><li>SQL</li><li>MySQL</li><li>SQLite</li><li>Sequelize</li></ul>
+          <p>Modelado relacional, consultas y acceso a datos desde la aplicación con un ORM.</p>
+        </article>
+        <article>
+          <span class="label">automatización</span>
+          <h3>Scripts y RPA</h3>
+          <ul class="chips"><li>Python</li><li>RPA</li><li>Automatización de tareas</li></ul>
+          <p>Scripts que sacan trabajo manual del medio: procesar datos, conectar sistemas y repetir tareas sin errores.</p>
+        </article>
+        <article>
+          <span class="label">análisis</span>
+          <h3>Procesos</h3>
+          <ul class="chips"><li>Relevamiento</li><li>Modelado As-Is / To-Be</li><li>Rediseño</li></ul>
+          <p>Entender cómo se trabaja hoy antes de proponer un sistema que lo cambie.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">-- proyectos</span>
+        <h2>Lo que vengo construyendo.</h2>
+      </div>
+      <div class="projects">
+
+        <article class="proj">
+          <div class="vis" aria-hidden="true">
+<pre><span class="kw">GET</span> /api/libros?autor=borges
+<span class="dim">→ 200 OK</span>
+{
+  <span class="str">"libros"</span>: [ … ],
+  <span class="str">"total"</span>: 12
+}</pre>
+          </div>
+          <div class="body">
+            <div class="kind">Backend · Proyecto académico</div>
+            <h3>API REST para una librería virtual</h3>
+            <p>API para gestionar el catálogo de una librería online: altas, consultas con filtros, modificaciones y bajas, con persistencia en una base relacional.</p>
+            <ul class="chips"><li>Node.js</li><li>Express</li><li>Sequelize</li><li>SQLite</li></ul>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="vis" aria-hidden="true">
+            <div class="flow"><span class="dim">as-is</span><b>turno en ventanilla</b><b>planilla en papel</b><b>carga duplicada</b></div>
+            <div class="flow" style="margin-top:14px"><span class="to">to-be</span><b>turno digital</b><b>registro único</b><b>reportes</b></div>
+          </div>
+          <div class="body">
+            <div class="kind">Análisis de procesos · Trabajo en equipo</div>
+            <h3>Rediseño de procesos en centros de salud municipales</h3>
+            <p>Relevamiento de cómo se gestionan las tareas en centros de salud municipales y propuesta de rediseño para reducir pasos manuales y mejorar la información disponible.</p>
+            <ul class="chips"><li>Relevamiento</li><li>As-Is / To-Be</li><li>Rediseño</li></ul>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="vis" aria-hidden="true">
+<pre><span class="kw">SELECT</span> activo, <span class="kw">SUM</span>(monto)
+<span class="kw">FROM</span>   operaciones
+<span class="kw">GROUP BY</span> activo;</pre>
+          </div>
+          <div class="body">
+            <div class="kind">Aplicación web · Proyecto personal</div>
+            <h3>Sistema de gestión de inversiones</h3>
+            <p>Aplicación web para registrar operaciones y seguir la evolución de una cartera personal, con foco en el modelo de datos y las consultas de resumen.</p>
+            <ul class="chips"><li>Backend</li><li>SQL</li><li>Web</li></ul>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Los bloques oscuros ilustran la temática de cada proyecto; no son capturas.</p>
+    </div>
+  </section>
+
+  <section id="como-trabajo">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">-- cómo encaro un problema</span>
+        <h2>De la tarea manual al proceso automatizado.</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1 · relevar</span><h3>Entender</h3><p>Ver cómo se trabaja hoy y quién hace cada cosa.</p></li>
+        <li><span class="n">2 · modelar</span><h3>Ordenar</h3><p>Llevarlo a un proceso y a un modelo de datos claros.</p></li>
+        <li><span class="n">3 · construir</span><h3>Resolver</h3><p>Rediseñar, programar o automatizar lo que lo necesita.</p></li>
+        <li><span class="n">4 · medir</span><h3>Comprobar</h3><p>Ver si funciona mejor y ajustar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="next">
+        <div class="sec-head" style="margin:0">
+          <span class="tag">-- contacto</span>
+          <h2>Busco mi primera experiencia en tecnología.</h2>
+          <p class="prose" style="color:var(--muted); margin:6px 0 0; max-width:48ch">Pasantía, trainee o puesto junior compatible con la facultad. Si tenés una búsqueda que encaje, me encantaría conversar.</p>
+        </div>
+        <div class="box">
+          <dl>
+            <div><dt>Áreas</dt><dd>Backend · Python · Node.js · Datos · RPA · Procesos</dd></div>
+            <div><dt>Modalidad</dt><dd>Part-time</dd></div>
+            <div><dt>Ubicación</dt><dd>Córdoba (presencial o híbrido) o remoto desde Argentina</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="item">
+          <span class="k">Correo</span>
+          <span class="v" id="mail">franciscomarengo22@gmail.com</span>
+          <button class="copy" id="copy-mail" type="button">Copiar</button>
+        </div>
+        <a class="item" href="https://wa.me/5493512600575" target="_blank" rel="noopener">
+          <span class="k">Teléfono / WhatsApp</span>
+          <span class="v">+54 9 351 260-0575 ↗</span>
+        </a>
+        <a class="item" href="https://www.linkedin.com/in/francisco-pablo-marengo-103165239/" target="_blank" rel="noopener">
+          <span class="k">LinkedIn</span>
+          <span class="v">Ver perfil ↗</span>
+        </a>
+        <a class="item" href="https://github.com/FPM22" target="_blank" rel="noopener">
+          <span class="k">GitHub</span>
+          <span class="v">github.com/FPM22 ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Francisco Pablo Marengo · Portfolio</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('copy-mail');
+  var mail = document.getElementById('mail');
+  btn.addEventListener('click', function(){
+    var text = mail.textContent.trim();
+    function selectIt(){
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Seleccionado';
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ btn.textContent = 'Copiado'; }, selectIt);
+    }catch(e){ selectIt(); }
+    setTimeout(function(){ btn.textContent = 'Copiar'; }, 2000);
+  });
+})();
+</script>
+</body>
+</html>
