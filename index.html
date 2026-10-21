@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Francisco Pablo Marengo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio de Francisco Pablo Marengo. Estudiante avanzado de Ingeniería en Sistemas de Información en UTN-FRC, orientado a backend, bases de datos y automatización de procesos.">
+<meta name="theme-color" content="#561a10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: columna de etiqueta a la izquierda y contenido a la derecha, filetes finos, mucho aire. */
+:root{
+  --bg:#f7f5f4;
+  --surface:#ffffff;
+  --ink:#231618;
+  --muted:#6b5e5b;
+  --line:#e3dad7;
+  --wine:#561a10;
+  --wine-soft:#74291b;
+  --wine-tint:#f1e5e0;
+  --il-bg:#ece2dc;
+  --il-a:#561a10;
+  --il-b:#a87a6b;
+  --il-c:#2c1a18;
+  --il-d:#d9c7be;
+  --il-e:#ffffff;
+  --il-f:#74291b;
+  --f-display:"Newsreader", "Iowan Old Style", Georgia, serif;
+  --f-body:"Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161110; --surface:#1f1716; --ink:#efe7e8; --muted:#a89996; --line:#362a28;
+    --wine:#cc7a5f; --wine-soft:#a95a42; --wine-tint:#2b1816;
+    --il-bg:#241918; --il-a:#7e2a1a; --il-b:#bb8f7e; --il-c:#0f0a09; --il-d:#3b2a28; --il-e:#efe7e8; --il-f:#cc7a5f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161110; --surface:#1f1716; --ink:#efe7e8; --muted:#a89996; --line:#362a28;
+  --wine:#cc7a5f; --wine-soft:#a95a42; --wine-tint:#2b1816;
+  --il-bg:#241918; --il-a:#7e2a1a; --il-b:#bb8f7e; --il-c:#0f0a09; --il-d:#3b2a28; --il-e:#efe7e8; --il-f:#cc7a5f;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--wine); outline-offset:3px}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(24px, env(safe-area-inset-left, 0px)); padding-right:max(24px, env(safe-area-inset-right, 0px))}
+.skip{position:absolute; left:-999px}
+.skip:focus{left:16px; top:16px; background:var(--surface); padding:8px 12px; z-index:20}
+.label{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--wine)}
+
+/* Nav */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--bg)}
+header.nav{position:sticky; top:env(safe-area-inset-top, 0px); z-index:9; background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:18px}
+.logo{font-family:var(--f-display); font-size:20px; text-decoration:none; letter-spacing:.01em}
+.logo em{color:var(--wine)}
+nav ul{display:flex; gap:28px; list-style:none; margin:0; padding:0}
+nav a{text-decoration:none; font-size:14px; color:var(--muted); transition:color .2s}
+nav a:hover{color:var(--wine)}
+@media (max-width:640px){nav ul{gap:16px} nav li.opt{display:none}}
+.nav-right{display:flex; align-items:center; gap:28px}
+.lang{display:inline-flex; border:1px solid var(--wine); border-radius:2px; overflow:hidden; flex:none}
+.lang button{font:inherit; font-size:12px; font-weight:600; letter-spacing:.1em; background:none; color:var(--wine); border:none; padding:5px 10px; cursor:pointer; transition:background .2s, color .2s}
+.lang button + button{border-left:1px solid var(--wine)}
+.lang button[aria-pressed="true"]{background:var(--wine); color:var(--bg)}
+.lang button:not([aria-pressed="true"]):hover{background:var(--wine-tint)}
+@media (max-width:640px){.nav-right{gap:14px} .logo{font-size:17px}}
+@media (max-width:420px){nav{display:none}}
+
+/* Hero */
+.hero{padding-block:96px 80px; display:grid; grid-template-columns:1.25fr 1fr; gap:64px; align-items:end}
+.hero > *{min-width:0}
+h1{font-family:var(--f-display); font-weight:400; font-size:clamp(46px, 6.6vw, 80px); line-height:1.02; letter-spacing:-.015em; margin:18px 0 26px; text-wrap:balance}
+h1 em{font-style:italic; color:var(--wine)}
+.lead{font-size:19px; color:var(--muted); max-width:38ch; margin:0 0 36px}
+.cta{display:flex; flex-wrap:wrap; gap:14px}
+.btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:500; font-size:15px; padding:13px 22px; border:1px solid var(--wine); border-radius:2px; transition:background .2s, color .2s}
+.btn.primary{background:var(--wine); color:var(--bg)}
+.btn.primary:hover{background:var(--wine-soft); border-color:var(--wine-soft)}
+.btn.ghost{color:var(--wine)}
+.btn.ghost:hover{background:var(--wine-tint)}
+
+.card{background:var(--surface); border:1px solid var(--line); padding:28px}
+.card .q{font-family:var(--f-mono); font-size:13px; line-height:1.7; color:var(--muted); margin:0 0 20px; white-space:pre-wrap; overflow-wrap:anywhere}
+.card .q b{font-weight:400; color:var(--wine)}
+.card dl{margin:0; display:grid}
+.card dl div{display:grid; grid-template-columns:96px 1fr; gap:12px; padding:10px 0; border-top:1px solid var(--line); font-size:15px}
+.card dt{color:var(--muted); font-size:13px}
+.card dd{margin:0}
+
+/* Sections */
+section{padding-block:88px; border-top:1px solid var(--line)}
+.sec{display:grid; grid-template-columns:220px minmax(0,1fr); gap:48px}
+.sec > *{min-width:0}
+.sec-side{display:flex; flex-direction:column; gap:10px}
+h2{font-family:var(--f-display); font-weight:400; font-size:clamp(32px, 4.2vw, 46px); line-height:1.1; letter-spacing:-.01em; margin:0 0 32px; text-wrap:balance; max-width:22ch}
+h2 em{font-style:italic; color:var(--wine)}
+h3{font-family:var(--f-display); font-weight:500; font-size:24px; line-height:1.2; margin:0}
+
+.prose p{margin:0 0 18px; max-width:62ch}
+.prose strong{font-weight:600}
+.facts{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:24px; margin:40px 0 0; padding:24px 0 0; border-top:1px solid var(--line)}
+.facts dt{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.facts dd{margin:4px 0 0; font-family:var(--f-display); font-size:20px}
+
+/* Stack */
+.stack{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0; border-top:1px solid var(--line)}
+.stack article{padding:28px 32px 28px 0; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:10px}
+.stack article:nth-child(even){padding-left:32px; padding-right:0; border-left:1px solid var(--line)}
+.stack p{margin:0; color:var(--muted); font-size:15.5px}
+.tools{font-size:14px; color:var(--wine)}
+
+/* Projects */
+.projects{display:grid; gap:28px}
+.proj{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); background:var(--surface); border:1px solid var(--line)}
+.proj .illu{background:var(--il-bg); border-right:1px solid var(--line); min-width:0}
+.illu svg{display:block; width:100%; height:100%; min-height:220px}
+.illu .a{fill:var(--il-a)} .illu .b{fill:var(--il-b)} .illu .c{fill:var(--il-c)}
+.illu .d{fill:var(--il-d)} .illu .e{fill:var(--il-e)} .illu .f{fill:var(--il-f)}
+.proj .body{padding:32px; display:flex; flex-direction:column; gap:14px; min-width:0}
+.proj .kind{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+.proj p{margin:0; color:var(--muted); font-size:16px}
+.proj .tools{margin-top:4px}
+.note{font-size:13px; color:var(--muted); margin:20px 0 0}
+.proj-link{align-self:flex-start; margin-top:6px; font-size:14px; font-weight:500; text-decoration:none; color:var(--wine); padding:9px 16px; border:1px solid var(--wine); border-radius:2px; transition:background .2s, color .2s}
+.proj-link:hover{background:var(--wine); color:var(--bg)}
+
+/* Process */
+.steps{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:28px}
+.steps li{padding-top:18px; border-top:1px solid var(--wine); display:flex; flex-direction:column; gap:8px}
+.steps .n{font-family:var(--f-display); font-style:italic; font-size:22px; color:var(--wine)}
+.steps h3{font-size:20px}
+.steps p{margin:0; font-size:15px; color:var(--muted)}
+
+/* Contact */
+.search{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px; padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:40px}
+.search dt{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.search dd{margin:4px 0 0; font-size:15.5px}
+.cv-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; padding:28px 32px; margin-bottom:40px; background:var(--wine-tint); border:1px solid var(--line)}
+.cv-text{font-family:var(--f-display); font-size:20px; max-width:30ch}
+.contact{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0; border-top:1px solid var(--line)}
+.contact .item{display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:20px 0; border-bottom:1px solid var(--line); text-decoration:none; min-width:0}
+.contact .item:nth-child(odd){padding-right:28px}
+.contact .item:nth-child(even){padding-left:28px; border-left:1px solid var(--line)}
+.contact .k{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); flex:none}
+.contact .v{font-family:var(--f-display); font-size:19px; text-align:right; overflow-wrap:anywhere; transition:color .2s}
+.contact a.item:hover .v{color:var(--wine)}
+.contact .mailrow{display:flex; align-items:baseline; gap:12px; justify-content:flex-end; flex-wrap:wrap; min-width:0}
+.copy{font:inherit; font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:none; border:none; border-bottom:1px solid var(--wine); color:var(--wine); padding:0 0 1px; cursor:pointer}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:32px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:14px; color:var(--muted)}
+footer a{text-decoration:none}
+footer a:hover{color:var(--wine)}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr; padding-block:64px 56px; gap:44px}
+  .sec{grid-template-columns:1fr; gap:16px}
+  .proj{grid-template-columns:1fr}
+  .proj .illu{border-right:none; border-bottom:1px solid var(--line)}
+  .steps{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .facts{grid-template-columns:repeat(2, minmax(0,1fr))}
+}
+@media (max-width:600px){
+  section{padding-block:64px}
+  .stack{grid-template-columns:1fr}
+  .stack article,.stack article:nth-child(even){padding:24px 0; border-left:none}
+  .steps,.search{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .contact .item,.contact .item:nth-child(odd),.contact .item:nth-child(even){padding:18px 0; border-left:none}
+  .proj .body{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#sobre-mi">Ir al contenido</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio">Francisco Pablo <em>Marengo</em></a>
+    <div class="nav-right">
+      <nav aria-label="Secciones">
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li class="opt"><a href="#tecnologias">Tecnologías</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="lang-es" data-lang="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div>
+      <span class="label">Ingeniería en Sistemas · UTN-FRC</span>
+      <h1>Datos, backend y <em>procesos</em> bien pensados.</h1>
+      <p class="lead">Soy Francisco Pablo Marengo, estudiante avanzado de Ingeniería en Sistemas. Me gusta entender cómo funciona un proceso y resolverlo con bases de datos, APIs y automatización.</p>
+      <div class="cta">
+        <a class="btn primary" href="#proyectos">Ver proyectos</a>
+        <a class="btn ghost" href="CV_Francisco_Pablo_Marengo.pdf" target="_blank" rel="noopener">Ver CV ↗</a>
+      </div>
+    </div>
+
+    <aside class="card" aria-label="Ficha">
+<p class="q"><b>SELECT</b> * <b>FROM</b> personas
+<b>WHERE</b> nombre = 'Francisco Pablo Marengo';</p>
+      <dl>
+        <div><dt>Carrera</dt><dd>Ing. en Sistemas de Información</dd></div>
+        <div><dt>Foco</dt><dd>Backend, bases de datos, RPA</dd></div>
+        <div><dt>Además</dt><dd>Análisis y rediseño de procesos</dd></div>
+        <div><dt>Ciudad</dt><dd>Córdoba, Argentina</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <section id="sobre-mi">
+    <div class="wrap sec">
+      <div class="sec-side"><span class="label">Sobre mí</span></div>
+      <div>
+        <h2>Primero entender el proceso. <em>Después</em> escribir el código.</h2>
+        <div class="prose">
+          <p>Soy estudiante avanzado de <strong>Ingeniería en Sistemas de Información</strong> en la UTN Facultad Regional Córdoba. Me interesa la parte del software que no se ve: las APIs, los modelos de datos y las reglas que hacen que un sistema funcione.</p>
+          <p>Me siento más cómodo con <strong>Python y SQL</strong>, y en los proyectos de la facultad trabajo con Node.js, Express y Sequelize. Disfruto diseñar una base de datos y escribir la consulta justa para responder una pregunta.</p>
+          <p>También me atrae el análisis de procesos: relevar cómo trabaja una organización, detectar tareas repetitivas y pensar qué conviene rediseñar y qué conviene automatizar.</p>
+          <p>Busco una primera experiencia profesional donde aportar, aprender de otras personas y crecer con desafíos reales.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Universidad</dt><dd>UTN · FRC</dd></div>
+          <div><dt>Situación</dt><dd>Estudiante avanzado</dd></div>
+          <div><dt>Egreso estimado</dt><dd>2028</dd></div>
+          <div><dt>Inglés</dt><dd>Intermedio-avanzado</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologias">
+    <div class="wrap sec">
+      <div class="sec-side"><span class="label">Tecnologías</span></div>
+      <div>
+        <h2>Con lo que trabajo <em>hoy</em>.</h2>
+        <div class="stack">
+          <article>
+            <h3>Lógica y APIs</h3>
+            <span class="tools">Node.js · Express · APIs REST · Integración de APIs</span>
+            <p>Endpoints, validación de parámetros y comunicación entre cliente, servidor y servicios externos.</p>
+          </article>
+          <article>
+            <h3>Bases de datos</h3>
+            <span class="tools">SQL · MySQL · SQLite · Sequelize</span>
+            <p>Modelado relacional, consultas y acceso a datos desde la aplicación con un ORM.</p>
+          </article>
+          <article>
+            <h3>Automatización</h3>
+            <span class="tools">Python · RPA</span>
+            <p>Scripts que sacan trabajo manual del medio: procesar datos, conectar sistemas y repetir tareas sin errores.</p>
+          </article>
+          <article>
+            <h3>Procesos</h3>
+            <span class="tools">Relevamiento · As-Is / To-Be · Rediseño</span>
+            <p>Entender cómo se trabaja hoy antes de proponer un sistema que lo cambie.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap sec">
+      <div class="sec-side"><span class="label">Proyectos</span></div>
+      <div>
+        <h2>Lo que vengo <em>construyendo</em>.</h2>
+        <div class="projects">
+
+          <article class="proj">
+            <div class="illu" aria-hidden="true">
+              <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+                <rect class="d" x="40" y="30" width="320" height="210" rx="2"/>
+                <rect class="c" x="40" y="96" width="320" height="6"/>
+                <rect class="c" x="40" y="166" width="320" height="6"/>
+                <rect class="c" x="40" y="234" width="320" height="6"/>
+                <g>
+                  <rect class="a" x="56" y="46" width="16" height="50"/><rect class="b" x="74" y="54" width="12" height="42"/>
+                  <rect class="f" x="88" y="42" width="18" height="54"/><rect class="e" x="108" y="50" width="12" height="46"/>
+                  <rect class="a" x="122" y="58" width="14" height="38"/><rect class="c" x="138" y="46" width="16" height="50"/>
+                  <rect class="b" x="156" y="52" width="14" height="44"/>
+                  <rect class="e" x="200" y="60" width="44" height="12"/><rect class="f" x="204" y="72" width="40" height="12"/><rect class="a" x="198" y="84" width="48" height="12"/>
+                  <rect class="f" x="270" y="44" width="14" height="52"/><rect class="e" x="286" y="50" width="16" height="46"/>
+                  <rect class="b" x="304" y="56" width="12" height="40"/><rect class="a" x="318" y="44" width="18" height="52"/>
+                </g>
+                <g>
+                  <rect class="b" x="56" y="118" width="18" height="48"/><rect class="a" x="76" y="124" width="14" height="42"/>
+                  <rect class="e" x="92" y="114" width="14" height="52"/><rect class="c" x="108" y="120" width="18" height="46"/>
+                  <rect class="f" x="140" y="126" width="12" height="40" transform="rotate(-12 146 166)"/>
+                  <rect class="a" x="176" y="114" width="16" height="52"/><rect class="b" x="194" y="122" width="14" height="44"/>
+                  <rect class="e" x="210" y="118" width="12" height="48"/><rect class="f" x="224" y="112" width="18" height="54"/>
+                  <rect class="c" x="244" y="124" width="14" height="42"/><rect class="a" x="260" y="118" width="16" height="48"/>
+                  <circle class="e" cx="320" cy="150" r="14"/><rect class="b" x="314" y="132" width="12" height="6"/>
+                </g>
+                <g>
+                  <rect class="e" x="56" y="186" width="14" height="48"/><rect class="f" x="72" y="192" width="16" height="42"/>
+                  <rect class="a" x="90" y="188" width="12" height="46"/><rect class="b" x="104" y="182" width="18" height="52"/>
+                  <rect class="e" x="150" y="198" width="50" height="12"/><rect class="a" x="146" y="210" width="56" height="12"/><rect class="b" x="152" y="222" width="46" height="12"/>
+                  <rect class="c" x="230" y="184" width="16" height="50"/><rect class="f" x="248" y="192" width="14" height="42"/>
+                  <rect class="a" x="264" y="186" width="18" height="48"/><rect class="e" x="284" y="190" width="12" height="44"/>
+                  <rect class="b" x="298" y="184" width="16" height="50"/><rect class="f" x="316" y="194" width="14" height="40"/>
+                </g>
+              </svg>
+            </div>
+            <div class="body">
+              <span class="kind">Full-stack · Proyecto académico</span>
+              <h3>Sistema de gestión de biblioteca</h3>
+              <p>Aplicación web para administrar libros, autores, categorías, editoriales, premios y sucursales. Una API REST en Express expone las operaciones de alta, consulta, modificación y baja, y una interfaz en React las consume con búsqueda en tiempo real y formularios validados.</p>
+              <span class="tools">React · Node.js · Express · Sequelize · SQLite</span>
+              <a class="proj-link" href="https://github.com/FPM22/software-development-academic-project" target="_blank" rel="noopener">Ver código ↗</a>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="illu" aria-hidden="true">
+              <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+                <rect class="d" x="0" y="214" width="400" height="46"/>
+                <rect class="e" x="90" y="80" width="220" height="134"/>
+                <rect class="c" x="80" y="70" width="240" height="12"/>
+                <rect class="e" x="160" y="22" width="80" height="58" rx="2"/>
+                <rect class="a" x="193" y="30" width="14" height="42"/>
+                <rect class="a" x="179" y="44" width="42" height="14"/>
+                <rect class="b" x="110" y="102" width="40" height="30"/><rect class="b" x="250" y="102" width="40" height="30"/>
+                <rect class="b" x="110" y="150" width="40" height="30"/><rect class="b" x="250" y="150" width="40" height="30"/>
+                <rect class="c" x="176" y="140" width="48" height="74"/>
+                <rect class="d" x="199" y="140" width="2" height="74"/>
+                <rect class="f" x="176" y="112" width="48" height="14"/>
+                <rect class="c" x="44" y="168" width="6" height="46"/><circle class="f" cx="47" cy="150" r="24"/>
+                <rect class="c" x="350" y="168" width="6" height="46"/><circle class="f" cx="353" cy="150" r="24"/>
+              </svg>
+            </div>
+            <div class="body">
+              <span class="kind">Análisis de procesos · Trabajo en equipo</span>
+              <h3>Rediseño de procesos en centros de salud municipales</h3>
+              <p>Relevamiento de cómo se gestionan las tareas en centros de salud municipales y propuesta de rediseño para reducir pasos manuales y mejorar la información disponible.</p>
+              <span class="tools">Relevamiento · As-Is / To-Be · Rediseño</span>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="illu" aria-hidden="true">
+              <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+                <g transform="rotate(-5 119 132)">
+                  <rect class="e" x="44" y="34" width="150" height="196" rx="2"/>
+                  <rect class="a" x="62" y="54" width="80" height="10"/>
+                  <rect class="d" x="62" y="80" width="112" height="5"/><rect class="d" x="62" y="96" width="100" height="5"/>
+                  <rect class="d" x="62" y="112" width="108" height="5"/><rect class="d" x="62" y="128" width="86" height="5"/>
+                  <rect class="b" x="62" y="150" width="60" height="20"/>
+                  <rect class="c" x="62" y="200" width="70" height="2"/>
+                  <path d="M70 196 q10 -14 18 0 t18 -2 t14 -4" fill="none" stroke="var(--il-a)" stroke-width="2.5" stroke-linecap="round"/>
+                </g>
+                <rect class="d" x="226" y="160" width="26" height="70"/>
+                <rect class="b" x="262" y="130" width="26" height="100"/>
+                <rect class="a" x="298" y="94" width="26" height="136"/>
+                <path d="M222 140 L270 108 L300 120 L352 60" fill="none" stroke="var(--il-f)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M340 58 L354 58 L354 72" fill="none" stroke="var(--il-f)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse class="c" cx="356" cy="226" rx="26" ry="7"/>
+                <ellipse class="b" cx="356" cy="220" rx="26" ry="7"/>
+                <ellipse class="c" cx="356" cy="210" rx="26" ry="7"/>
+                <ellipse class="b" cx="356" cy="204" rx="26" ry="7"/>
+                <ellipse class="c" cx="356" cy="194" rx="26" ry="7"/>
+                <ellipse class="b" cx="356" cy="188" rx="26" ry="7"/>
+              </svg>
+            </div>
+            <div class="body">
+              <span class="kind">Aplicación web · Proyecto personal</span>
+              <h3>Sistema de gestión de inversiones</h3>
+              <p>Aplicación web para registrar operaciones y seguir la evolución de una cartera personal, con foco en el modelo de datos y las consultas de resumen.</p>
+              <span class="tools">Backend · SQL · Web</span>
+            </div>
+          </article>
+
+        </div>
+        <p class="note">Las ilustraciones representan la temática de cada proyecto; no son capturas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-trabajo">
+    <div class="wrap sec">
+      <div class="sec-side"><span class="label">Cómo trabajo</span></div>
+      <div>
+        <h2>De la tarea manual al proceso <em>automatizado</em>.</h2>
+        <ol class="steps">
+          <li><span class="n">i.</span><h3>Entender</h3><p>Ver cómo se trabaja hoy y quién hace cada cosa.</p></li>
+          <li><span class="n">ii.</span><h3>Ordenar</h3><p>Llevarlo a un proceso y a un modelo de datos claros.</p></li>
+          <li><span class="n">iii.</span><h3>Resolver</h3><p>Rediseñar, programar o automatizar lo que lo necesita.</p></li>
+          <li><span class="n">iv.</span><h3>Comprobar</h3><p>Medir si funciona mejor y ajustar.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap sec">
+      <div class="sec-side"><span class="label">Contacto</span></div>
+      <div>
+        <h2>Busco mi primera experiencia en <em>tecnología</em>.</h2>
+        <dl class="search">
+          <div><dt>Busco</dt><dd>Pasantía, trainee o puesto junior</dd></div>
+          <div><dt>Modalidad</dt><dd>Part-time, compatible con la facultad</dd></div>
+          <div><dt>Ubicación</dt><dd>Córdoba o remoto desde Argentina</dd></div>
+        </dl>
+        <div class="cv-row">
+          <span class="cv-text">Mi CV completo, con formación, proyectos y conocimientos.</span>
+          <div class="cta">
+            <a class="btn primary" href="CV_Francisco_Pablo_Marengo.pdf" target="_blank" rel="noopener">Ver CV ↗</a>
+            <a class="btn ghost" href="CV_Francisco_Pablo_Marengo.pdf" download>Descargar PDF ↓</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="item">
+            <span class="k">Correo</span>
+            <span class="mailrow"><span class="v" id="mail">franciscomarengo22@gmail.com</span><button class="copy" id="copy-mail" type="button">Copiar</button></span>
+          </div>
+          <a class="item" href="https://wa.me/5493512600575" target="_blank" rel="noopener">
+            <span class="k">Teléfono</span>
+            <span class="v">+54 9 351 260-0575</span>
+          </a>
+          <a class="item" href="https://www.linkedin.com/in/francisco-pablo-marengo-103165239/" target="_blank" rel="noopener">
+            <span class="k">LinkedIn</span>
+            <span class="v">Ver perfil ↗</span>
+          </a>
+          <a class="item" href="https://github.com/FPM22" target="_blank" rel="noopener">
+            <span class="k">GitHub</span>
+            <span class="v">github.com/FPM22 ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Francisco Pablo Marengo · Córdoba, Argentina</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Traducciones: texto en español (como está en la página) → inglés */
+  var EN = {
+    "Ir al contenido": "Skip to content",
+    "Sobre mí": "About",
+    "Tecnologías": "Skills",
+    "Proyectos": "Projects",
+    "Contacto": "Contact",
+    "Ingeniería en Sistemas · UTN-FRC": "Information Systems Engineering · UTN-FRC",
+    "Datos, backend y <em>procesos</em> bien pensados.": "Data, backend and <em>processes</em>, well thought out.",
+    "Soy Francisco Pablo Marengo, estudiante avanzado de Ingeniería en Sistemas. Me gusta entender cómo funciona un proceso y resolverlo con bases de datos, APIs y automatización.": "I'm Francisco Pablo Marengo, an advanced Information Systems Engineering student. I like understanding how a process works and solving it with databases, APIs and automation.",
+    "Ver proyectos": "See projects",
+    "Ver CV ↗": "View CV ↗",
+    "Descargar PDF ↓": "Download PDF ↓",
+    "Mi CV completo, con formación, proyectos y conocimientos.": "My full CV, with education, projects and skills.",
+    "<b>SELECT</b> * <b>FROM</b> personas <b>WHERE</b> nombre = 'Francisco Pablo Marengo';": "<b>SELECT</b> * <b>FROM</b> people\n<b>WHERE</b> name = 'Francisco Pablo Marengo';",
+    "Carrera": "Degree",
+    "Ing. en Sistemas de Información": "Information Systems Engineering",
+    "Foco": "Focus",
+    "Backend, bases de datos, RPA": "Backend, databases, RPA",
+    "Además": "Also",
+    "Análisis y rediseño de procesos": "Process analysis and redesign",
+    "Ciudad": "City",
+    "Primero entender el proceso. <em>Después</em> escribir el código.": "First understand the process. <em>Then</em> write the code.",
+    "Soy estudiante avanzado de <strong>Ingeniería en Sistemas de Información</strong> en la UTN Facultad Regional Córdoba. Me interesa la parte del software que no se ve: las APIs, los modelos de datos y las reglas que hacen que un sistema funcione.": "I'm an advanced student of <strong>Information Systems Engineering</strong> at UTN Facultad Regional Córdoba (National Technological University). I'm drawn to the part of software you don't see: APIs, data models and the rules that make a system work.",
+    "Me siento más cómodo con <strong>Python y SQL</strong>, y en los proyectos de la facultad trabajo con Node.js, Express y Sequelize. Disfruto diseñar una base de datos y escribir la consulta justa para responder una pregunta.": "I'm most comfortable with <strong>Python and SQL</strong>, and in university projects I work with Node.js, Express and Sequelize. I enjoy designing a database and writing the right query to answer a question.",
+    "También me atrae el análisis de procesos: relevar cómo trabaja una organización, detectar tareas repetitivas y pensar qué conviene rediseñar y qué conviene automatizar.": "I'm also interested in process analysis: mapping how an organization works, spotting repetitive tasks and deciding what should be redesigned and what should be automated.",
+    "Busco una primera experiencia profesional donde aportar, aprender de otras personas y crecer con desafíos reales.": "I'm looking for a first professional role where I can contribute, learn from others and grow through real challenges.",
+    "Universidad": "University",
+    "Situación": "Status",
+    "Estudiante avanzado": "Advanced student",
+    "Egreso estimado": "Expected graduation",
+    "Inglés": "English",
+    "Intermedio-avanzado": "Upper-intermediate",
+    "Con lo que trabajo <em>hoy</em>.": "What I work with <em>today</em>.",
+    "Lógica y APIs": "Logic and APIs",
+    "Node.js · Express · APIs REST · Integración de APIs": "Node.js · Express · REST APIs · API integration",
+    "Endpoints, validación de parámetros y comunicación entre cliente, servidor y servicios externos.": "Endpoints, parameter validation and communication between client, server and external services.",
+    "Bases de datos": "Databases",
+    "Modelado relacional, consultas y acceso a datos desde la aplicación con un ORM.": "Relational modeling, queries and data access from the application through an ORM.",
+    "Automatización": "Automation",
+    "Scripts que sacan trabajo manual del medio: procesar datos, conectar sistemas y repetir tareas sin errores.": "Scripts that take manual work out of the way: processing data, connecting systems and repeating tasks without errors.",
+    "Procesos": "Processes",
+    "Relevamiento · As-Is / To-Be · Rediseño": "Process mapping · As-Is / To-Be · Redesign",
+    "Entender cómo se trabaja hoy antes de proponer un sistema que lo cambie.": "Understanding how work gets done today before proposing a system that changes it.",
+    "Lo que vengo <em>construyendo</em>.": "What I've been <em>building</em>.",
+    "Full-stack · Proyecto académico": "Full-stack · Academic project",
+    "Sistema de gestión de biblioteca": "Library management system",
+    "Aplicación web para administrar libros, autores, categorías, editoriales, premios y sucursales. Una API REST en Express expone las operaciones de alta, consulta, modificación y baja, y una interfaz en React las consume con búsqueda en tiempo real y formularios validados.": "Web app to manage books, authors, categories, publishers, awards and branches. An Express REST API exposes create, read, update and delete operations, and a React interface consumes them with real-time search and validated forms.",
+    "Ver código ↗": "View code ↗",
+    "Análisis de procesos · Trabajo en equipo": "Process analysis · Team project",
+    "Rediseño de procesos en centros de salud municipales": "Process redesign for municipal health centers",
+    "Relevamiento de cómo se gestionan las tareas en centros de salud municipales y propuesta de rediseño para reducir pasos manuales y mejorar la información disponible.": "Mapping how tasks are handled in municipal health centers and proposing a redesign to cut manual steps and improve the information available.",
+    "Aplicación web · Proyecto personal": "Web application · Personal project",
+    "Sistema de gestión de inversiones": "Investment management system",
+    "Aplicación web para registrar operaciones y seguir la evolución de una cartera personal, con foco en el modelo de datos y las consultas de resumen.": "Web app to record transactions and track a personal portfolio over time, focused on the data model and summary queries.",
+    "Las ilustraciones representan la temática de cada proyecto; no son capturas.": "Illustrations show each project's topic; they are not screenshots.",
+    "Cómo trabajo": "How I work",
+    "De la tarea manual al proceso <em>automatizado</em>.": "From manual task to <em>automated</em> process.",
+    "Entender": "Understand",
+    "Ver cómo se trabaja hoy y quién hace cada cosa.": "See how work gets done today and who does what.",
+    "Ordenar": "Organize",
+    "Llevarlo a un proceso y a un modelo de datos claros.": "Turn it into a clear process and data model.",
+    "Resolver": "Solve",
+    "Rediseñar, programar o automatizar lo que lo necesita.": "Redesign, build or automate what needs it.",
+    "Comprobar": "Verify",
+    "Medir si funciona mejor y ajustar.": "Measure whether it works better and adjust.",
+    "Busco mi primera experiencia en <em>tecnología</em>.": "Looking for my first role in <em>tech</em>.",
+    "Busco": "Looking for",
+    "Pasantía, trainee o puesto junior": "Internship, trainee or junior role",
+    "Modalidad": "Schedule",
+    "Part-time, compatible con la facultad": "Part-time, compatible with my studies",
+    "Ubicación": "Location",
+    "Córdoba o remoto desde Argentina": "Córdoba, Argentina or remote",
+    "Correo": "Email",
+    "Teléfono": "Phone",
+    "Ver perfil ↗": "View profile ↗",
+    "Volver arriba ↑": "Back to top ↑"
+  };
+  var UI = {
+    es: {copy:"Copiar", copied:"Copiado", selected:"Seleccionado", title:"Francisco Pablo Marengo"},
+    en: {copy:"Copy", copied:"Copied", selected:"Selected", title:"Francisco Pablo Marengo"}
+  };
+  var SELECTOR = ".skip, nav a, .label, h1, .lead, .btn, .card .q, dt, dd, h2, h3, .prose p, .tools, .stack p, .kind, .proj p, .proj-link, .cv-text, .note, .steps p, .contact .k, .contact .v:not(#mail), footer a";
+  function norm(s){ return s.replace(/\s+/g, " ").trim(); }
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll(SELECTOR)).filter(function(el){
+    var key = norm(el.innerHTML);
+    if (Object.prototype.hasOwnProperty.call(EN, key)) { el._es = el.innerHTML; el._en = EN[key]; return true; }
+    return false;
+  });
+
+  var current = "es";
+  var copyBtn = document.getElementById("copy-mail");
+  var mail = document.getElementById("mail");
+  var btnEs = document.getElementById("lang-es");
+  var btnEn = document.getElementById("lang-en");
+
+  function apply(lang){
+    current = lang;
+    nodes.forEach(function(el){ el.innerHTML = lang === "en" ? el._en : el._es; });
+    document.documentElement.lang = lang;
+    document.title = UI[lang].title;
+    copyBtn.textContent = UI[lang].copy;
+    btnEs.setAttribute("aria-pressed", lang === "es" ? "true" : "false");
+    btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+  }
+  function choose(lang){
+    apply(lang);
+    try { localStorage.setItem("portfolio-lang", lang); } catch(e) {}
+  }
+  btnEs.addEventListener("click", function(){ choose("es"); });
+  btnEn.addEventListener("click", function(){ choose("en"); });
+
+  /* Idioma inicial: el que eligió la persona antes; si no, el de su navegador */
+  var saved = null;
+  try { saved = localStorage.getItem("portfolio-lang"); } catch(e) {}
+  var initial = saved;
+  if (initial !== "es" && initial !== "en") {
+    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "es"];
+    initial = /^es\b/i.test(langs[0] || "") ? "es" : "en";
+  }
+  apply(initial);
+
+  copyBtn.addEventListener("click", function(){
+    var text = mail.textContent.trim();
+    function selectIt(){
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copyBtn.textContent = UI[current].selected;
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ copyBtn.textContent = UI[current].copied; }, selectIt);
+    }catch(e){ selectIt(); }
+    setTimeout(function(){ copyBtn.textContent = UI[current].copy; }, 2000);
+  });
+})();
+</script>
+</body>
+</html>
